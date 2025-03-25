@@ -11,7 +11,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/segmentio/ksuid"
+	"github.com/inovacc/ksuid"
 )
 
 var (
@@ -32,22 +32,22 @@ func main() {
 	flag.Parse()
 	args := flag.Args()
 
-	var print func(ksuid.KSUID)
+	var p func(ksuid.KSUID)
 	switch format {
 	case "string":
-		print = printString
+		p = printString
 	case "inspect":
-		print = printInspect
+		p = printInspect
 	case "time":
-		print = printTime
+		p = printTime
 	case "timestamp":
-		print = printTimestamp
+		p = printTimestamp
 	case "payload":
-		print = printPayload
+		p = printPayload
 	case "raw":
-		print = printRaw
+		p = printRaw
 	case "template":
-		print = printTemplate
+		p = printTemplate
 	default:
 		fmt.Println("Bad formatting function:", format)
 		os.Exit(1)
@@ -74,7 +74,7 @@ func main() {
 		if verbose {
 			fmt.Printf("%s: ", id)
 		}
-		print(id)
+		p(id)
 	}
 }
 
@@ -114,17 +114,17 @@ func printTimestamp(id ksuid.KSUID) {
 }
 
 func printPayload(id ksuid.KSUID) {
-	os.Stdout.Write(id.Payload())
+	_, _ = os.Stdout.Write(id.Payload())
 }
 
 func printRaw(id ksuid.KSUID) {
-	os.Stdout.Write(id.Bytes())
+	_, _ = os.Stdout.Write(id.Bytes())
 }
 
 func printTemplate(id ksuid.KSUID) {
 	b := &bytes.Buffer{}
 	t := template.Must(template.New("").Parse(tpltxt))
-	t.Execute(b, struct {
+	_ = t.Execute(b, struct {
 		String    string
 		Raw       string
 		Time      time.Time
@@ -138,5 +138,5 @@ func printTemplate(id ksuid.KSUID) {
 		Payload:   strings.ToUpper(hex.EncodeToString(id.Payload())),
 	})
 	b.WriteByte('\n')
-	io.Copy(os.Stdout, b)
+	_, _ = io.Copy(os.Stdout, b)
 }

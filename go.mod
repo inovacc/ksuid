@@ -1,3 +1,3 @@
-module github.com/segmentio/ksuid
+module github.com/inovacc/ksuid
 
-go 1.12
+go 1.24

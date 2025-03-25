@@ -98,7 +98,7 @@ func TestParse(t *testing.T) {
 }
 
 func TestIssue25(t *testing.T) {
-	// https://github.com/segmentio/ksuid/issues/25
+	// https://github.com/inovacc/ksuid/issues/25
 	for _, s := range []string{
 		"aaaaaaaaaaaaaaaaaaaaaaaaaaa",
 		"aWgEPTl1tmebfsQzFP4bxwgy80!",
@@ -309,7 +309,7 @@ func TestGetTimestamp(t *testing.T) {
 	x, _ := NewRandomWithTime(nowTime)
 	xTime := int64(x.Timestamp())
 	unix := nowTime.Unix()
-	if xTime != unix - epochStamp {
+	if xTime != unix-epochStamp {
 		t.Fatal(xTime, "!=", unix)
 	}
 }
@@ -346,7 +346,7 @@ func BenchmarkString(b *testing.B) {
 
 func BenchmarkParse(b *testing.B) {
 	for i := 0; i != b.N; i++ {
-		Parse(maxStringEncoded)
+		_, _ = Parse(maxStringEncoded)
 	}
 }
 
