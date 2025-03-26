@@ -1,4 +1,4 @@
-# ksuid [![Go Report Card](https://goreportcard.com/badge/github.com/inovacc/ksuid)](https://goreportcard.com/report/github.com/inovacc/ksuid) [![GoDoc](https://godoc.org/github.com/inovacc/ksuid?status.svg)](https://godoc.org/github.com/inovacc/ksuid) [![Circle CI](https://circleci.com/gh/inovacc/ksuid.svg?style=shield)](https://circleci.com/gh/inovacc/ksuid.svg?style=shield)
+# ksuid [![Go Report Card](https://goreportcard.com/badge/github.com/inovacc/ksuid)](https://goreportcard.com/report/github.com/inovacc/ksuid) [![GoDoc](https://godoc.org/github.com/inovacc/ksuid?status.svg)](https://godoc.org/github.com/inovacc/ksuid) [![Test](https://github.com/inovacc/ksuid/actions/workflows/test.yml/badge.svg)](https://github.com/inovacc/ksuid/actions/workflows/test.yml)
 
 ksuid is an efficient, comprehensive, battle-tested Go library for
 generating and parsing a specific kind of globally unique identifier
