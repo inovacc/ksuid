@@ -141,7 +141,7 @@ use cases.
 Given a Go build environment, it can be installed with the command:
 
 ```sh
-$ go install github.com/inovacc/ksuid/cmd/ksuid
+$ go install github.com/inovacc/ksuid/cmd/ksuid@latest
 ```
 
 ## CLI Usage Examples
