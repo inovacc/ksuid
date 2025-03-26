@@ -13,8 +13,8 @@ import (
 //
 // A typical usage of a Sequence looks like this:
 //
-//	seq := ksuid.Sequence{
-//		Seed: ksuid.New(),
+//	seq := id.Sequence{
+//		Seed: id.New(),
 //	}
 //	id, err := seq.Next()
 //

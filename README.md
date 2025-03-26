@@ -5,6 +5,7 @@ generating and parsing a specific kind of globally unique identifier
 called a *KSUID*. This library serves as its reference implementation.
 
 ## Install
+
 ```sh
 go get -u github.com/inovacc/ksuid
 ```
@@ -12,7 +13,8 @@ go get -u github.com/inovacc/ksuid
 ## What is a KSUID?
 
 KSUID is for K-Sortable Unique IDentifier. It is a kind of globally
-unique identifier similar to a [RFC 4122 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), built from the ground-up to be "naturally"
+unique identifier similar to a [RFC 4122 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), built from
+the ground-up to be "naturally"
 sorted by generation timestamp without any special type-aware logic.
 
 In short, running a set of KSUIDs through the UNIX `sort` command will result
@@ -226,28 +228,30 @@ $ ksuid -f template -t '{ "timestamp": "{{ .Timestamp }}", "payload": "{{ .Paylo
 ## OrNil functions
 
 There are times when you are sure your ksuid is correct. But you need to get it from bytes or string and pass it
-it's to the structure. For this, there are OrNil functions that return ksuid.Nil on error and can be called 
+it's to the structure. For this, there are OrNil functions that return ksuid.Nil on error and can be called
 directly in the structure.
 
 **Functions:**
+
 - `ParseOrNil()`
 - `FromPartsOrNil()`
 - `FromBytesOrNil()`
 
 An example of using the function without OrNil:
+
 ```go
 func getPosts(before, after []byte) {
-	b, err := ksuid.FromBytes(before)
-	if err != nil {
-		// handle error
-	}
+b, err := ksuid.FromBytes(before)
+if err != nil {
+// handle error
+}
 
-	a, err := ksuid.FromBytes(after)
-	if err != nil {
-		// handle error
-	}
+a, err := ksuid.FromBytes(after)
+if err != nil {
+// handle error
+}
 
-	sortOptions := SortOptions{Before: b, After: a}
+sortOptions := SortOptions{Before: b, After: a}
 }
 ```
 
@@ -255,10 +259,10 @@ It is much more convenient to do it like this:
 
 ```go
 func getPosts(before, after []byte) {
-	sortOptions := SortOptions{
-		Before: ksuid.FromBytesOrNil(before),
-		After:  ksuid.FromBytesOrNil(after),
-	}
+sortOptions := SortOptions{
+Before: ksuid.FromBytesOrNil(before),
+After:  ksuid.FromBytesOrNil(after),
+}
 }
 ```
 

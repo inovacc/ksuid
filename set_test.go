@@ -76,7 +76,7 @@ func testCompressedSetGoString(t *testing.T) {
 
 	set := Compress(id1, id2, id3)
 
-	if s := set.GoString(); s != `ksuid.CompressedSet{"0uHjRkQoL2JKAQIULPdqqb5fOkk", "0uHjRvkOG5CbtoXW5oCEp3L2xBu", "0uHjSJ4Pe5606kT2XWixK6dirlo"}` {
+	if s := set.GoString(); s != `id.CompressedSet{"0uHjRkQoL2JKAQIULPdqqb5fOkk", "0uHjRvkOG5CbtoXW5oCEp3L2xBu", "0uHjSJ4Pe5606kT2XWixK6dirlo"}` {
 		t.Error(s)
 	}
 }

@@ -3,6 +3,7 @@ package ksuid
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"sort"
@@ -10,6 +11,20 @@ import (
 	"testing"
 	"time"
 )
+
+func TestNewString(t *testing.T) {
+	v := NewString()
+	if len(v) != 27 {
+		t.Fatal("Expected 27 characters, got", len(v))
+	}
+}
+
+func TestNewBytes(t *testing.T) {
+	v := NewBytes()
+	if len(v) != 20 {
+		t.Fatal("Expected 20 bytes, got", len(v))
+	}
+}
 
 func TestConstructionTimestamp(t *testing.T) {
 	x := New()
@@ -63,7 +78,7 @@ func TestPadding(t *testing.T) {
 
 func TestParse(t *testing.T) {
 	_, err := Parse("123")
-	if err != errStrSize {
+	if !errors.Is(err, errStrSize) {
 		t.Fatal("Expected Parsing a 3-char string to return an error")
 	}
 
@@ -104,7 +119,7 @@ func TestIssue25(t *testing.T) {
 		"aWgEPTl1tmebfsQzFP4bxwgy80!",
 	} {
 		_, err := Parse(s)
-		if err != errStrValue {
+		if !errors.Is(err, errStrValue) {
 			t.Error("invalid KSUID representations cannot be successfully parsed, got err =", err)
 		}
 	}
@@ -214,8 +229,8 @@ func TestSqlScanner(t *testing.T) {
 	id2 := New()
 
 	tests := []struct {
-		ksuid KSUID
-		value interface{}
+		id    KSUID
+		value any
 	}{
 		{Nil, nil},
 		{id1, id1.String()},
@@ -230,9 +245,9 @@ func TestSqlScanner(t *testing.T) {
 				t.Error(err)
 			}
 
-			if id != test.ksuid {
+			if id != test.id {
 				t.Error("bad KSUID:")
-				t.Logf("expected %v", test.ksuid)
+				t.Logf("expected %v", test.id)
 				t.Logf("found    %v", id)
 			}
 		})

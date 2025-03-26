@@ -25,11 +25,11 @@ func (set CompressedSet) String() string {
 	return b.String()
 }
 
-// String satisfies the fmt.GoStringer interface, returns a Go representation of
+// GoString satisfies the fmt.GoStringer interface, returns a Go representation of
 // the set.
 func (set CompressedSet) GoString() string {
 	b := bytes.Buffer{}
-	b.WriteString("ksuid.CompressedSet{")
+	b.WriteString("id.CompressedSet{")
 	set.writeTo(&b)
 	b.WriteByte('}')
 	return b.String()

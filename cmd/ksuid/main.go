@@ -17,14 +17,14 @@ import (
 var (
 	count   int
 	format  string
-	tpltxt  string
+	tpl     string
 	verbose bool
 )
 
 func init() {
 	flag.IntVar(&count, "n", 1, "Number of KSUIDs to generate when called with no other arguments.")
 	flag.StringVar(&format, "f", "string", "One of string, inspect, time, timestamp, payload, raw, or template.")
-	flag.StringVar(&tpltxt, "t", "", "The Go template used to format the output.")
+	flag.StringVar(&tpl, "t", "", "The Go template used to format the output.")
 	flag.BoolVar(&verbose, "v", false, "Turn on verbose mode.")
 }
 
@@ -123,7 +123,7 @@ func printRaw(id ksuid.KSUID) {
 
 func printTemplate(id ksuid.KSUID) {
 	b := &bytes.Buffer{}
-	t := template.Must(template.New("").Parse(tpltxt))
+	t := template.Must(template.New("").Parse(tpl))
 	_ = t.Execute(b, struct {
 		String    string
 		Raw       string
